@@ -1,6 +1,7 @@
 ##Flappy-learn
 
 + Guide the flappy bird to the correct answers while answering simple questions about German Language.
++ Made using the awesome phaser(http://phaser.io) framework.
 
 ###TODO
 + Add : import data from another file (json)
