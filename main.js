@@ -8,6 +8,7 @@ var flag = false;
 var count = 0;
 var correct_option;
 var bird_position;
+var game_started = false;
 
 var data_string ="\
 Question,Option One,Option Two;\
@@ -72,7 +73,7 @@ game_state.main.prototype = {
         this.label_score = this.game.add.text(20, 20, "0", style);
         
         //
-        this.text1 = this.add.text(4*width, 50, "Option 1", style);
+        this.text1 = this.add.text(width/2-200, height/2-50, "Click Anywhere to Start game\n Use spacebar to flap", style);
         this.text2 = this.add.text(6*width, height/2, "Question", style);
         this.text3 = this.add.text(7*width, height-90, "Option 2", style);
 
@@ -82,10 +83,18 @@ game_state.main.prototype = {
         this.point = game.add.audio('point',0.2);
         this.nope = game.add.audio('nope',0.2);
         this.die = game.add.audio('die',0.2);
-    },
 
+        this.game.input.onTap.addOnce(this.start,this);
+    },
+    start: function(){
+        game_started = true;
+        console.log('game started');
+        this.bird.body.gravity.y = 1000;
+    },
     // This function is called 60 times per second
     update: function() {
+        if(game_started == false)
+            return 0;
         if (this.bird.inWorld == false || this.bird.position.y > height - 40)
             this.game_over(); 
         this.game.physics.overlap(this.bird, this.pipe, this.game_over, null, this);
@@ -112,6 +121,7 @@ game_state.main.prototype = {
     game_over: function(){
         this.die.play();
         this.restart_game();
+        this.game.input.onTap.addOnce(this.start,this);
     },
     jump: function() {
         // Add a vertical velocity to the bird
@@ -125,14 +135,9 @@ game_state.main.prototype = {
         this.game.state.start('main');
     },
 
-    add_one_pipe: function(x, y) {
-        var pipe = this.pipes.getFirstDead();
-        pipe.reset(x, y);
-        pipe.body.velocity.x = -pipe_velocity; 
-        pipe.outOfBoundsKill = true;
-    },
-
     add_row_of_pipes: function() {
+        if(game_started == false)
+            return 0;
         var r = Math.floor(100 + Math.random()*60); 
         var n = Math.floor(Math.random()*2); //either 0 or 1
         
