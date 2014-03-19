@@ -88,6 +88,7 @@ game_state.main.prototype = {
     start: function(){
         game_started = true;
         this.bird.body.gravity.y = 1000;
+        this.option1_tb.position.x = width;
     },
     // This function is called 60 times per second
     update: function() {
