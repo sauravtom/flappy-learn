@@ -6,17 +6,31 @@
   <title>Flappy Learn</title>
 
   <style>
+    body{
+      text-align: center;
+      font-family : "Courier New", Courier, monospace;
+    }
     #game_div, p {
       width: 700px;
       margin: auto;
       margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .info{
+      
+      font-size: 70%;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
+  <h1>Flappy learn</h1>
   <div id="game_div"> </div>
-
+  <div class='info'>
+    Use spacebar to flap, and maneuver the bird [up or down] to the correct translation of the german word specified in the middle.<br>
+    <a href='http://github.com/sauravtom/flappy-learn'>Github</a> 
+  </div>
   <script type="text/javascript" src="phaser.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
 </body>
