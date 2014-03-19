@@ -70,11 +70,12 @@ game_state.main.prototype = {
         var style = { font: "30px Arial", fill: "#ffffff" };
         this.label_score = this.game.add.text(20, 20, "0", style);
         
-        //Add the text boxes for question and answers
-        this.option1_tb = this.add.text(width/2-200, height/2-50, "Press Space Key to start the Game", style);
-        this.question_tb = this.add.text(6*width, height/2, "", { font: "30px Arial", fill: "#ffffff" });
-        this.option2_tb = this.add.text(7*width, height-90, "", style);
+        //Add the text boxes to contain question and answers
+        this.question_tb = this.add.text(-width, height/2, "", { font: "30px Arial", fill: "#ffffff" });
+        this.option1_tb = this.add.text(-width, height/2, "", style);
+        this.option2_tb = this.add.text(-width, height-90, "", style);
 
+        this.instruction_tb = this.add.text(width/2-200, height/2-50, "Press Space Key to start the Game", style);
         this.result_tb = this.add.text(width, height/2-20, "Correct", { font: "20px Arial", fill: "#ffffff" });
         
         this.flap = game.add.audio('flap',0.1);
@@ -88,7 +89,7 @@ game_state.main.prototype = {
     start: function(){
         game_started = true;
         this.bird.body.gravity.y = 1000;
-        this.option1_tb.position.x = width;
+        this.instruction_tb.position.x = -width;
     },
     // This function is called 60 times per second
     update: function() {
